@@ -1,0 +1,49 @@
+server:
+  port: 8099
+
+
+spring:
+  application:
+    name: springRESTclemen
+  h2:
+    console:
+      settings:
+        web-allow-others: false
+        trace: false
+      path: /h2-console
+    
+  # ===============================
+  # DB
+  # ===============================
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    platform: h2
+    username: sa
+    password:
+
+  # ===============================
+  # JPA / HIBERNATE
+  # ===============================
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: false
+        format_sql: false
+    open-in-view: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+      #actuator (pegar y probar antes de admin)
+      #si ponemos * habilitamos todos los endpoints si quermemos solo unos cuantos se enumera separados por comas: env, beans...etc
+        include: "*"
